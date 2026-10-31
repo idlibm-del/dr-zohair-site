@@ -1,0 +1,428 @@
+/* ==========================================================================
+   responsive.css — layout changes for wider screens.
+   style.css is written for small screens first; each block below adds
+   to it as more space becomes available.
+
+   Breakpoints
+     40em  (640px)   large phones / small tablets
+     48em  (768px)   tablets
+     64em  (1024px)  small laptops, landscape tablets
+     70em  (1120px)  full desktop navigation
+     80em  (1280px)  wide desktops
+
+   The print layout is at the end of this file.
+   ========================================================================== */
+
+
+/* 40em — large phones
+   -------------------------------------------------------------------------- */
+@media (min-width: 40em) {
+  .hero-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl) var(--space-xl);
+  }
+
+  .pub {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  /* Year groups hide the year column, so the entry takes the full width */
+  .pub-group .pub {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entry,
+  .achievement {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+
+  .bio-grid {
+    grid-template-columns: minmax(0, 1fr) 12rem;
+    align-items: start;
+  }
+
+  .entry-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .entry-choice {
+    min-height: 16rem;
+    border-bottom: 0;
+  }
+
+  .entry-choice + .entry-choice {
+    border-inline-start: 1px solid var(--color-border);
+  }
+
+  .entry-choices {
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+
+/* 48em — tablets
+   -------------------------------------------------------------------------- */
+@media (min-width: 48em) {
+  :root {
+    --header-height: 4.75rem;
+  }
+
+  .brand-name {
+    font-size: 1.3125rem;
+  }
+
+  .highlights {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .intro-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  /* Homepage books: three covers in a row, the middle one set lower */
+  .book-grid--featured {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .book-grid--featured .book {
+    display: block;
+  }
+
+  .book-grid--featured .book-cover {
+    margin-bottom: var(--space-l);
+  }
+
+  .book-grid--featured .book:nth-child(3n + 2) {
+    margin-top: var(--space-3xl);
+  }
+
+  .research-tools {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    column-gap: var(--space-2xl);
+  }
+
+  .tools-footer {
+    grid-column: 1 / -1;
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+
+  .cta {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .entry-choice {
+    min-height: 22rem;
+    padding-inline: var(--space-3xl);
+  }
+}
+
+
+/* 64em — laptops
+   -------------------------------------------------------------------------- */
+@media (min-width: 64em) {
+  /* Asymmetric hero: text takes the wider column */
+  .hero-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-3xl);
+  }
+
+  .hero-portrait {
+    justify-self: end;
+    width: calc(100% - 1.25rem);
+    max-width: 28rem;
+  }
+
+  .profile-layout {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .toc {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-height) + 2.5rem);
+    align-self: start;
+  }
+
+  .bio-grid {
+    grid-template-columns: minmax(0, 1fr) 14rem;
+    gap: var(--space-2xl);
+  }
+
+  /* Publications grouped by year: sticky year column */
+  .pub-group {
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .pub-group-year {
+    position: sticky;
+    top: calc(var(--header-height) + 1.5rem);
+    align-self: start;
+    padding-top: var(--space-xl);
+  }
+
+  .book-grid:not(.book-grid--featured) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  }
+}
+
+
+/* 70em — full desktop navigation
+   -------------------------------------------------------------------------- */
+@media (min-width: 70em) {
+  .js .nav-toggle {
+    display: none;
+  }
+
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .brand {
+    flex-shrink: 0;
+    max-width: 18rem;
+  }
+
+  /* The panel becomes an ordinary inline bar */
+  .js .nav-panel,
+  html:not(.js) .nav-panel {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-l);
+    padding: 0;
+    overflow: visible;
+    background: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html:not(.js) .site-nav {
+    width: auto;
+  }
+
+  .nav-list,
+  html:not(.js) .nav-list {
+    display: flex;
+    gap: var(--space-l);
+  }
+
+  .js .nav-list a,
+  .nav-list a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    border: 0;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+    background-image: linear-gradient(var(--color-gold), var(--color-gold));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size var(--duration) var(--ease-out), color var(--duration-fast) ease;
+  }
+
+  html[lang="ar"] .nav-list a {
+    font-size: 0.9375rem;
+  }
+
+  [dir="rtl"] .nav-list a {
+    background-position: 100% 100%;
+  }
+
+  .nav-list a:hover,
+  .nav-list a:focus-visible {
+    color: var(--color-navy);
+    background-size: 100% 1px;
+  }
+
+  .js .nav-list a[aria-current="page"],
+  .nav-list a[aria-current="page"] {
+    color: var(--color-navy);
+    font-weight: 500;
+    background-size: 100% 1px;
+  }
+
+  .js .nav-list a[aria-current="page"]::before {
+    display: none;
+  }
+
+  .js .nav-panel .lang-switch {
+    align-self: center;
+  }
+}
+
+
+/* 80em — wide desktops
+   -------------------------------------------------------------------------- */
+@media (min-width: 80em) {
+  .nav-list,
+  html:not(.js) .nav-list {
+    gap: var(--space-xl);
+  }
+
+  .hero-grid {
+    gap: 6rem;
+  }
+
+  .profile-layout {
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 6rem;
+  }
+}
+
+
+/* Print: content only, on white. js/theme.js switches to the light colours and
+   js/main.js opens folded sections just before printing.
+   -------------------------------------------------------------------------- */
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  body,
+  .site-header,
+  .section,
+  .section--white,
+  .site-footer {
+    background: none;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+
+  .skip-link,
+  .site-nav,
+  .theme-toggle,
+  .toc,
+  .lang-switch,
+  .research-tools,
+  .profile-more summary,
+  .hero-actions,
+  .footer-nav,
+  .footer-links,
+  .cta,
+  .lightbox {
+    display: none;
+  }
+
+  .site-header {
+    position: static;
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+
+  .section,
+  .page-hero,
+  .hero {
+    padding-block: var(--space-l);
+  }
+
+  .profile-layout {
+    display: block;
+  }
+
+  .profile-section + .profile-section {
+    margin-top: var(--space-l);
+    padding-top: var(--space-l);
+  }
+
+  .pub-group-year {
+    position: static;
+    padding-top: 0;
+  }
+
+  .profile-more {
+    margin-top: 0;
+  }
+
+  .hero-grid {
+    gap: var(--space-l);
+  }
+
+  .hero-portrait {
+    max-width: 12rem;
+  }
+
+  .entry,
+  .achievement {
+    padding-block: var(--space-xs);
+  }
+
+  .reveal-ready .reveal,
+  .anim-rise,
+  .hero-portrait img,
+  .hero-portrait::before {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  .pub,
+  .entry,
+  .achievement,
+  .book,
+  .interest-list li {
+    break-inside: avoid;
+  }
+
+  /* A link on paper only helps if its address is visible */
+  .pub-links a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8125rem;
+    overflow-wrap: anywhere;
+  }
+
+  .pub-links .icon-arrow {
+    display: none;
+  }
+
+  .site-footer {
+    padding-block: var(--space-l) 0;
+    border-top: 1px solid var(--color-border-strong);
+    color: var(--color-text-muted);
+  }
+
+  .site-footer .footer-name,
+  .footer-bottom {
+    color: var(--color-text);
+  }
+
+  .footer-grid {
+    display: block;
+  }
+}

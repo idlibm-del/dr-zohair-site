@@ -1,0 +1,4 @@
+# Allow all crawlers.
+Sitemap: https://dr-zohair.com/sitemap.xml
+User-agent: *
+Allow: /
